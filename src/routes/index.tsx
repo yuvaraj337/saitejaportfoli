@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import AboutMe from "../components/AboutMe";
+import TechnicalSkills from "../components/TechnicalSkills";
+import Certifications from "../components/Certifications";
 
 const BASE_IMAGE = "./images/Base_image.png";
 const REVEAL_IMAGE = "./images/Reveal_image.png";
@@ -273,6 +276,15 @@ function Index() {
 
         <span id="projects" className="sr-only">Projects</span>
       </section>
+
+      {/* About Me Section */}
+      <AboutMe />
+
+      {/* Technical Skills Section */}
+      <TechnicalSkills />
+
+      {/* Certifications Section */}
+      <Certifications />
     </main>
   );
 }
