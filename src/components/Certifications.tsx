@@ -51,10 +51,10 @@ const CERTIFICATIONS = [
   },
   {
     id: "sec0",
-    name: "TryHackMe SEC0 Certification",
-    label: "SEC0",
+    name: "TryHackMe SECO Certification",
+    label: "SECO",
     logoSrc: "/cert-logos/sec0.png",
-    logoAlt: "TryHackMe SEC0",
+    logoAlt: "TryHackMe SECO",
   },
   {
     id: "sec1",
@@ -70,7 +70,6 @@ const CERTIFICATIONS = [
 /* ------------------------------------------------------------------ */
 export default function Certifications() {
   const sectionRef = useRef<HTMLElement>(null);
-  const navLabelRef = useRef<HTMLDivElement>(null);
   const topRightRef = useRef<HTMLDivElement>(null);
   const showcaseRef = useRef<HTMLDivElement>(null);
   const bottomRightRef = useRef<HTMLDivElement>(null);
@@ -90,7 +89,6 @@ export default function Certifications() {
     ).matches;
 
     if (prefersReducedMotion) {
-      if (navLabelRef.current) gsap.set(navLabelRef.current, { opacity: 1, y: 0 });
       if (topRightRef.current) gsap.set(topRightRef.current, { opacity: 1, y: 0 });
       if (showcaseRef.current) gsap.set(showcaseRef.current, { opacity: 1, y: 0 });
       if (bottomRightRef.current) gsap.set(bottomRightRef.current, { opacity: 1, y: 0 });
@@ -103,7 +101,7 @@ export default function Certifications() {
     const ctx = gsap.context(() => {
       /* Set initial states */
       gsap.set(
-        [navLabelRef.current, topRightRef.current, bottomRightRef.current],
+        [topRightRef.current, bottomRightRef.current],
         { opacity: 0, y: 15 }
       );
 
@@ -132,27 +130,21 @@ export default function Certifications() {
         0
       );
 
-      /* 2 — Nav label */
-      tl.to(
-        navLabelRef.current,
-        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
-        0.1
-      );
-
+      /* 2 — Top right label */
       tl.to(
         topRightRef.current,
         { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
         0.15
       );
 
-      /* 3 — Left side exact showcase reveals */
+      /* 3 — Left side exact showcase background reveals */
       tl.to(
         showcaseRef.current,
         { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" },
         0.25
       );
 
-      /* 9 — Certification cards: sequential verification animation */
+      /* 4 — Certification cards: sequential verification animation */
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
         const scanLine = card.querySelector(".cert-card-scan") as HTMLElement;
@@ -252,7 +244,7 @@ export default function Certifications() {
         }
       });
 
-      /* 10 — After all verified: subtle crimson pulse on container */
+      /* 5 — After all verified: subtle crimson pulse on container */
       const pulseTime = 1.0 + CERTIFICATIONS.length * 0.25 + 0.5;
       if (cardsContainerRef.current) {
         tl.fromTo(
@@ -297,95 +289,94 @@ export default function Certifications() {
       {/* Atmospheric background */}
       <div className="cert-atmosphere" aria-hidden="true" />
 
+      {/* Bottom-right corner rays from reference image */}
+      <div className="cert-br-rays" aria-hidden="true">
+        <img
+          src="/images/cert_bottom_right_rays.png"
+          alt=""
+          className="cert-br-rays-img"
+        />
+      </div>
+
       <div className="cert-inner">
-        {/* ---- TOP NAV BAR ---- */}
-        <div className="cert-nav">
-          <div ref={navLabelRef} className="cert-nav-left">
-            <span className="cert-nav-num">03</span>
-            <span className="cert-nav-line" aria-hidden="true" />
-            <span className="cert-nav-label">CERTIFICATIONS</span>
-          </div>
-          <div ref={topRightRef} className="cert-nav-right">
-            VERIFIED SKILLS. REAL PROGRESS.
+        {/* ---- LEFT COLUMN — Exact Showcase Background Scene ---- */}
+        <div ref={showcaseRef} className="cert-left">
+          <img
+            src="/images/cert_left_showcase.png"
+            alt="Certifications - Credentials That Validate My Skills. Industry-recognized certifications that strengthen my foundation in networking, security, and hands-on offensive skills. Certifications verify my foundation. Hands-on practice drives my growth. LEARN / PRACTICE / ADVANCE"
+            className="cert-left-img"
+            width={658}
+            height={915}
+            loading="eager"
+          />
+
+          {/* Semantic accessible content for screen readers & SEO */}
+          <div className="sr-only">
+            <span>03 / CERTIFICATIONS</span>
+            <h2>Credentials That Validate My Skills.</h2>
+            <p>
+              Industry-recognized certifications that strengthen my foundation
+              in networking, security, and hands-on offensive skills.
+            </p>
+            <blockquote>
+              Certifications verify my foundation. Hands-on practice drives my growth.
+            </blockquote>
+            <div>LEARN / PRACTICE / ADVANCE</div>
           </div>
         </div>
 
-        {/* ---- MAIN CONTENT (two columns) ---- */}
-        <div className="cert-content">
-          {/* LEFT COLUMN — Exact Showcase Art & Typography */}
-          <div className="cert-left">
-            <div ref={showcaseRef} className="cert-left-showcase">
-              <img
-                src="/images/cert_left_showcase.png"
-                alt="Certifications - Credentials That Validate My Skills. Industry-recognized certifications that strengthen my foundation in networking, security, and hands-on offensive skills. Certifications verify my foundation. Hands-on practice drives my growth. LEARN / PRACTICE / ADVANCE"
-                className="cert-left-showcase-img"
-                width={663}
-                height={837}
-                loading="eager"
-              />
-            </div>
-
-            {/* Semantic accessible content for screen readers & SEO */}
-            <div className="sr-only">
-              <span>CERTIFICATIONS</span>
-              <h2>Credentials That Validate My Skills.</h2>
-              <p>
-                Industry-recognized certifications that strengthen my foundation
-                in networking, security, and hands-on offensive skills.
-              </p>
-              <blockquote>
-                Certifications verify my foundation. Hands-on practice drives my growth.
-              </blockquote>
-              <div>LEARN / PRACTICE / ADVANCE</div>
-            </div>
+        {/* ---- RIGHT COLUMN — Top Label, Cards & Bottom Label ---- */}
+        <div className="cert-right">
+          {/* Top-Right Label */}
+          <div ref={topRightRef} className="cert-nav-right">
+            <span>VERIFIED SKILLS. REAL PROGRESS.</span>
+            <span className="cert-nav-dash" aria-hidden="true" />
           </div>
 
-          {/* RIGHT COLUMN — Certification cards */}
-          <div className="cert-right">
-            <div ref={cardsContainerRef} className="cert-cards">
-              {CERTIFICATIONS.map((cert, index) => (
-                <div
-                  key={cert.id}
-                  ref={setCardRef(index)}
-                  className="cert-card"
-                  tabIndex={0}
-                  role="article"
-                  aria-label={cert.name}
-                >
-                  {/* Scan line */}
-                  <div className="cert-card-scan" aria-hidden="true" />
+          {/* Cards Container */}
+          <div ref={cardsContainerRef} className="cert-cards">
+            {CERTIFICATIONS.map((cert, index) => (
+              <div
+                key={cert.id}
+                ref={setCardRef(index)}
+                className="cert-card"
+                tabIndex={0}
+                role="article"
+                aria-label={cert.name}
+              >
+                {/* Scan line */}
+                <div className="cert-card-scan" aria-hidden="true" />
 
-                  <div className="cert-card-content">
-                    <div className="cert-card-logo">
-                      <img
-                        src={cert.logoSrc}
-                        alt={cert.logoAlt}
-                        className={`cert-logo-img cert-logo-${cert.id}`}
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="cert-card-body">
-                      <h3 className="cert-card-name">{cert.name}</h3>
-                      <span className="cert-card-label">{cert.label}</span>
-                    </div>
-                    <div className="cert-card-actions">
-                      <span className="cert-card-ext">
-                        <ExternalLinkIcon />
-                      </span>
-                      <span className="cert-card-arrow">
-                        <ChevronRight />
-                      </span>
-                    </div>
+                <div className="cert-card-content">
+                  <div className="cert-card-logo">
+                    <img
+                      src={cert.logoSrc}
+                      alt={cert.logoAlt}
+                      className={`cert-logo-img cert-logo-${cert.id}`}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="cert-card-body">
+                    <h3 className="cert-card-name">{cert.name}</h3>
+                    <span className="cert-card-label">{cert.label}</span>
+                  </div>
+                  <div className="cert-card-actions">
+                    <span className="cert-card-ext">
+                      <ExternalLinkIcon />
+                    </span>
+                    <span className="cert-card-arrow">
+                      <ChevronRight />
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
-            {/* Right column bottom micro-label */}
-            <div ref={bottomRightRef} className="cert-footer-right">
-              <span>A MORE SECURE TOMORROW</span>
-              <span className="cert-footer-line" aria-hidden="true" />
-            </div>
+          {/* Bottom-Right Label */}
+          <div ref={bottomRightRef} className="cert-footer-right">
+            <span>A MORE SECURE TOMORROW</span>
+            <span className="cert-footer-line" aria-hidden="true" />
           </div>
         </div>
       </div>

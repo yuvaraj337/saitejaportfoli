@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import AboutMe from "../components/AboutMe";
 import TechnicalSkills from "../components/TechnicalSkills";
 import Certifications from "../components/Certifications";
+import WorkExperience from "../components/WorkExperience";
+import Education from "../components/Education";
+import FeaturedProjects from "../components/FeaturedProjects";
+import LetsConnect from "../components/LetsConnect";
 
 const BASE_IMAGE = "./images/Base_image.png";
 const REVEAL_IMAGE = "./images/Reveal_image.png";
@@ -285,6 +289,18 @@ function Index() {
 
       {/* Certifications Section */}
       <Certifications />
+
+      {/* Work Experience Section */}
+      <WorkExperience />
+
+      {/* Education Section */}
+      <Education />
+
+      {/* Featured Projects Section */}
+      <FeaturedProjects />
+
+      {/* Let's Connect Section */}
+      <LetsConnect />
     </main>
   );
 }
