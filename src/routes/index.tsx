@@ -106,7 +106,7 @@ function RevealLayer({ image, cursorX, cursorY, radius }: RevealLayerProps) {
 
 function BrandLogo() {
   return (
-    <span className="flex items-center gap-2.5" aria-label="Nasha.co home">
+    <span className="flex items-center gap-2.5" aria-label=" home">
       <svg
         width="26"
         height="26"
@@ -116,7 +116,7 @@ function BrandLogo() {
       >
         <path d="M 256 256 L 128 256 L 0 128 L 128 128 Z M 256 128 L 128 128 L 0 0 L 128 0 Z" />
       </svg>
-      <span className="font-playfair text-xl font-medium italic">Nasha.co</span>
+      <span className="font-playfair text-xl font-medium italic"></span>
     </span>
   );
 }
@@ -190,7 +190,7 @@ function Index() {
         />
 
         <nav className="absolute inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-5 text-hero-foreground sm:px-8 sm:py-7 md:px-14">
-          <a href="/" className="shrink-0" aria-label="Nasha.co home">
+          <a href="/" className="shrink-0" aria-label="home">
             <BrandLogo />
           </a>
 
@@ -216,10 +216,10 @@ function Index() {
           </div>
 
           <a
-            href="mailto:hello@dhaval.co"
+            href="#lets-connect"
             className="hidden rounded-full bg-hero-foreground px-6 py-2.5 text-sm font-semibold text-hero transition-colors hover:bg-hero-foreground/90 md:block"
           >
-            Let's talk
+            Let's connect
           </a>
           <button
             type="button"
@@ -245,13 +245,13 @@ function Index() {
               className="hero-anim hero-reveal -mt-1 block text-5xl font-normal sm:text-7xl md:text-8xl"
               style={{ letterSpacing: "-0.08em", animationDelay: "0.42s" }}
             >
-              NASHA
+              SAI TEJA
             </span>
             <span
               className="hero-anim hero-reveal font-playfair mt-3 block text-base italic text-hero-foreground/90 sm:mt-4 sm:text-lg md:text-xl"
               style={{ letterSpacing: "-0.02em", animationDelay: "0.58s" }}
             >
-              UXUI Designer
+              Network Security Engineer / Penetration Tester
             </span>
           </h1>
         </div>
@@ -262,8 +262,7 @@ function Index() {
           style={{ left: "100px", animationDelay: "0.7s" }}
         >
           <p className="text-sm font-light leading-relaxed text-hero-foreground/75">
-            I design with curiosity and build with code. Obsessed with AI tools, live coding,
-            and finding new ways to make digital experiences feel alive.
+            3+ years defending enterprise firewalls — now I break them, ethically. Sharpening offensive skills through hands-on network pentesting, CTFs, and independent labs.
           </p>
         </div>
 
@@ -273,8 +272,7 @@ function Index() {
           style={{ animationDelay: "0.85s" }}
         >
           <p className="text-sm font-light leading-relaxed text-hero-foreground/75">
-            UX/UI designer who codes. I use AI to design faster, build smarter, and create
-            digital experiences that actually work.
+            Network security engineer turned penetration tester, pursuing an M.Sc. in Mathematical Data Science in Germany. Certified. Curious. Built for the network layer.
           </p>
         </div>
 

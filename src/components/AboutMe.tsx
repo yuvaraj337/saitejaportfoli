@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CybersecurityShield from "./CybersecurityShield";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -92,16 +93,12 @@ export default function AboutMe() {
   const quoteTextRef = useRef<HTMLDivElement>(null);
   const bioRef = useRef<HTMLDivElement>(null);
   const pillsRef = useRef<HTMLDivElement>(null);
-  const deskRef = useRef<HTMLDivElement>(null);
-  const redGlowRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const shieldRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     /* Respect prefers-reduced-motion */
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const isMobile = window.innerWidth < 768;
 
@@ -124,12 +121,7 @@ export default function AboutMe() {
           gsap.set(el, { opacity: 1, y: 0, x: 0 });
         }
       });
-      if (quoteLineRef.current)
-        gsap.set(quoteLineRef.current, { scaleY: 1 });
-      if (overlayRef.current)
-        gsap.set(overlayRef.current, { opacity: 0 });
-      if (redGlowRef.current)
-        gsap.set(redGlowRef.current, { opacity: 0.45 });
+      if (quoteLineRef.current) gsap.set(quoteLineRef.current, { scaleY: 1 });
       /* Reveal pills children */
       if (pillsRef.current) {
         gsap.set(pillsRef.current.children, { opacity: 1, y: 0 });
@@ -151,7 +143,7 @@ export default function AboutMe() {
           headingLine3Ref.current,
           bioRef.current,
         ],
-        { opacity: 0, y: 15 }
+        { opacity: 0, y: 15 },
       );
 
       gsap.set(quoteTextRef.current, { opacity: 0, x: 20 });
@@ -159,8 +151,6 @@ export default function AboutMe() {
         scaleY: 0,
         transformOrigin: "top center",
       });
-      gsap.set(overlayRef.current, { opacity: 0.55 });
-      gsap.set(redGlowRef.current, { opacity: 0.15 });
 
       if (pillsRef.current) {
         gsap.set(Array.from(pillsRef.current.children), {
@@ -176,10 +166,10 @@ export default function AboutMe() {
         });
       }
 
-      /* ---- Parallax on desk image (desktop only) ---- */
-      if (!isMobile && deskRef.current) {
-        gsap.to(deskRef.current, {
-          yPercent: -12,
+      /* ---- Floating parallax on shield (desktop only) ---- */
+      if (!isMobile && shieldRef.current) {
+        gsap.to(shieldRef.current, {
+          yPercent: -8,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -203,77 +193,27 @@ export default function AboutMe() {
         },
       });
 
-      /* 1 — Reveal environment: lift overlay darkness */
-      tl.to(
-        overlayRef.current,
-        { opacity: 0, duration: 0.6, ease: "power2.inOut" },
-        0
-      );
-
-      /* Red glow intensifies */
-      tl.to(
-        redGlowRef.current,
-        { opacity: 0.45, duration: 0.8, ease: "power2.inOut" },
-        0.1
-      );
-
-      /* 2 — Label + motto */
-      tl.to(
-        labelRef.current,
-        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" },
-        0.15
-      );
-      tl.to(
-        mottoRef.current,
-        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" },
-        0.2
-      );
+      /* 1 — Label + motto */
+      tl.to(labelRef.current, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.1);
+      tl.to(mottoRef.current, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.2);
 
       /* 3 — Heading lines */
-      tl.to(
-        headingLine1Ref.current,
-        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
-        0.28
-      );
-      tl.to(
-        headingLine2Ref.current,
-        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
-        0.36
-      );
-      tl.to(
-        headingLine3Ref.current,
-        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
-        0.44
-      );
+      tl.to(headingLine1Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.28);
+      tl.to(headingLine2Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.36);
+      tl.to(headingLine3Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.44);
 
       /* 4 — Quote vertical line draws in, then quote text slides */
-      tl.to(
-        quoteLineRef.current,
-        { scaleY: 1, duration: 0.35, ease: "power2.inOut" },
-        0.42
-      );
-      tl.to(
-        quoteTextRef.current,
-        { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" },
-        0.52
-      );
+      tl.to(quoteLineRef.current, { scaleY: 1, duration: 0.35, ease: "power2.inOut" }, 0.42);
+      tl.to(quoteTextRef.current, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 0.52);
 
       /* 5 — Bio paragraph */
-      tl.to(
-        bioRef.current,
-        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" },
-        0.58
-      );
+      tl.to(bioRef.current, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.58);
 
       /* 6 — Skills labels on right */
       if (skillsRef.current) {
         const skillEls = Array.from(skillsRef.current.children);
         skillEls.forEach((el, i) => {
-          tl.to(
-            el,
-            { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" },
-            0.55 + i * 0.06
-          );
+          tl.to(el, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, 0.55 + i * 0.06);
         });
       }
 
@@ -281,11 +221,7 @@ export default function AboutMe() {
       if (pillsRef.current) {
         const pillEls = Array.from(pillsRef.current.children);
         pillEls.forEach((el, i) => {
-          tl.to(
-            el,
-            { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" },
-            0.72 + i * 0.07
-          );
+          tl.to(el, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.72 + i * 0.07);
         });
       }
 
@@ -297,17 +233,12 @@ export default function AboutMe() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="about-me"
-      className="about-section"
-      aria-label="About Me"
-    >
-      {/* Dark overlay for initial reveal */}
-      <div ref={overlayRef} className="about-overlay" aria-hidden="true" />
+    <section ref={sectionRef} id="about-me" className="about-section" aria-label="About Me">
+      {/* 1. REFERENCE 2 background image — bottom layer */}
+      <div className="about-bg-layer" aria-hidden="true" />
 
-      {/* Red ambient glow on right */}
-      <div ref={redGlowRef} className="about-red-glow" aria-hidden="true" />
+      {/* 2. Very subtle dark/black readability overlay */}
+      <div className="about-bg-overlay" aria-hidden="true" />
 
       <div ref={innerRef} className="about-inner">
         {/* ---- LEFT COLUMN ---- */}
@@ -352,10 +283,9 @@ export default function AboutMe() {
           {/* Bio */}
           <div ref={bioRef} className="about-bio">
             <p>
-              3+ years defending enterprise firewalls — now I break them, ethically.
-              Sharpening offensive skills through hands-on network pentesting, CTFs,
-              and independent labs. Pursuing an M.Sc. in Mathematical Data Science
-              in Germany, alongside it.
+              3+ years defending enterprise firewalls — now I break them, ethically. Sharpening
+              offensive skills through hands-on network pentesting, CTFs, and independent labs.
+              Pursuing an M.Sc. in Mathematical Data Science in Germany, alongside it.
             </p>
             <p>Certified. Curious. Built for the network layer.</p>
           </div>
@@ -363,15 +293,21 @@ export default function AboutMe() {
           {/* Info Pills */}
           <div ref={pillsRef} className="about-pills">
             <div className="about-pill">
-              <span className="about-pill-icon"><LocationIcon /></span>
+              <span className="about-pill-icon">
+                <LocationIcon />
+              </span>
               <span>Berlin, Germany</span>
             </div>
             <div className="about-pill">
-              <span className="about-pill-icon"><WorkPermitIcon /></span>
+              <span className="about-pill-icon">
+                <WorkPermitIcon />
+              </span>
               <span>Work Permit: German</span>
             </div>
             <div className="about-pill">
-              <span className="about-pill-icon"><NationalityIcon /></span>
+              <span className="about-pill-icon">
+                <NationalityIcon />
+              </span>
               <span>Nationality: Indian</span>
             </div>
           </div>
@@ -406,28 +342,8 @@ export default function AboutMe() {
             ))}
           </div>
 
-          {/* Desk scene (CSS-rendered dark scene with mug) */}
-          <div ref={deskRef} className="about-desk">
-            <div className="about-desk-scene" aria-hidden="true">
-              {/* Books stack */}
-              <div className="about-books">
-                <div className="about-book about-book-1" />
-                <div className="about-book about-book-2" />
-                <div className="about-book about-book-3" />
-                <div className="about-book about-book-4" />
-                <div className="about-book about-book-5" />
-              </div>
-              {/* Mug */}
-              <div className="about-mug">
-                <div className="about-mug-body">
-                  <span className="about-mug-text">
-                    KEEP<br />LEARNING<br />KEEP<br />HACKING
-                  </span>
-                </div>
-                <div className="about-mug-handle" />
-              </div>
-            </div>
-          </div>
+          {/* Rotating Cybersecurity Shield with Real-Time WebGL Transparency */}
+          <CybersecurityShield wrapperRef={shieldRef} />
         </div>
       </div>
     </section>
