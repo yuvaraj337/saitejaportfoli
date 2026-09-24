@@ -16,7 +16,7 @@ const PROJECTS = [
     description:
       "Built a virtual lab using Kali Linux, Metasploitable 2 and Windows/Linux VMs. Performed network reconnaissance, exploitation and CVE-based reporting.",
     tags: ["Nmap", "Metasploit", "VirtualBox"],
-    image: "/images/project_network_vuln.jpg",
+    image: "/images/project_network_vuln.png",
     imageAlt: "Network Vulnerability Assessment Lab diagram and node topology",
   },
   {
@@ -26,7 +26,7 @@ const PROJECTS = [
     description:
       "Analyzed 802.11 protocols, performed wireless reconnaissance and tested WPA2/WPA3 & WPS security.",
     tags: ["Aircrack-ng", "Scapy", "Wireshark"],
-    image: "/images/project_wireless_sec.jpg",
+    image: "/images/project_wireless_sec.png",
     imageAlt: "Wireless Security Assessment Lab hardware and Wi-Fi signals",
   },
   {
@@ -36,7 +36,7 @@ const PROJECTS = [
     description:
       "Captured and analyzed network traffic, identified credentials and hashes, and performed password cracking.",
     tags: ["Wireshark", "Hashcat", "John the Ripper"],
-    image: "/images/project_traffic_analysis.jpg",
+    image: "/images/project_traffic_analysis.png",
     imageAlt: "Network Traffic Analysis and packet inspection console",
   },
   {
