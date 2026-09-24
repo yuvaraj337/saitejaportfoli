@@ -1202,6 +1202,9 @@
 
 /* ---- CERTIFICATION CARD ---- */
 .cert-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   position: relative;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(220, 38, 38, 0.18);

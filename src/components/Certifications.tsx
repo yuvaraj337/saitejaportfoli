@@ -14,6 +14,7 @@ const CERTIFICATIONS = [
     label: "CCNA",
     logoSrc: "/cert-logos/cisco.png",
     logoAlt: "Cisco",
+    pdfUrl: "/certificates/Cisco Certified Network Associate certificate (1).pdf",
   },
   {
     id: "ccsa",
@@ -21,6 +22,7 @@ const CERTIFICATIONS = [
     label: "CCSA",
     logoSrc: "/cert-logos/checkpoint.png",
     logoAlt: "Check Point",
+    pdfUrl: "/certificates/PDFCertification - CCSA.pdf",
   },
   {
     id: "nmap",
@@ -49,6 +51,7 @@ const CERTIFICATIONS = [
     label: "LinkedIn Learning   |   Sep 01, 2026",
     logoSrc: "/cert-logos/linkedin.png",
     logoAlt: "LinkedIn Learning",
+    pdfUrl: "/certificates/CertificateOfCompletion_Wireshark Essential Training.pdf",
   },
   {
     id: "nmap-packt",
@@ -56,6 +59,7 @@ const CERTIFICATIONS = [
     label: "Packt / Coursera   |   Feb 06, 2026",
     logoSrc: "/cert-logos/packt.png",
     logoAlt: "Packt / Coursera",
+    pdfUrl: "/certificates/NMAP - PACKT.pdf",
   },
 ];
 
@@ -68,10 +72,10 @@ export default function Certifications() {
   const showcaseRef = useRef<HTMLDivElement>(null);
   const bottomRightRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   const setCardRef = useCallback(
-    (index: number) => (el: HTMLDivElement | null) => {
+    (index: number) => (el: HTMLElement | null) => {
       cardRefs.current[index] = el;
     },
     []
@@ -329,34 +333,46 @@ export default function Certifications() {
 
           {/* Cards Container */}
           <div ref={cardsContainerRef} className="cert-cards">
-            {CERTIFICATIONS.map((cert, index) => (
-              <div
-                key={cert.id}
-                ref={setCardRef(index)}
-                className="cert-card"
-                tabIndex={0}
-                role="article"
-                aria-label={cert.name}
-              >
-                {/* Scan line */}
-                <div className="cert-card-scan" aria-hidden="true" />
+            {CERTIFICATIONS.map((cert, index) => {
+              const CardTag = cert.pdfUrl ? "a" : "div";
+              const linkProps = cert.pdfUrl
+                ? {
+                    href: encodeURI(cert.pdfUrl),
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  }
+                : {};
 
-                <div className="cert-card-content">
-                  <div className="cert-card-logo">
-                    <img
-                      src={cert.logoSrc}
-                      alt={cert.logoAlt}
-                      className={`cert-logo-img cert-logo-${cert.id}`}
-                      loading="lazy"
-                    />
+              return (
+                <CardTag
+                  key={cert.id}
+                  ref={setCardRef(index) as any}
+                  className="cert-card"
+                  tabIndex={0}
+                  role={cert.pdfUrl ? "link" : "article"}
+                  aria-label={cert.name}
+                  {...linkProps}
+                >
+                  {/* Scan line */}
+                  <div className="cert-card-scan" aria-hidden="true" />
+
+                  <div className="cert-card-content">
+                    <div className="cert-card-logo">
+                      <img
+                        src={cert.logoSrc}
+                        alt={cert.logoAlt}
+                        className={`cert-logo-img cert-logo-${cert.id}`}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="cert-card-body">
+                      <h3 className="cert-card-name">{cert.name}</h3>
+                      <span className="cert-card-label">{cert.label}</span>
+                    </div>
                   </div>
-                  <div className="cert-card-body">
-                    <h3 className="cert-card-name">{cert.name}</h3>
-                    <span className="cert-card-label">{cert.label}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+                </CardTag>
+              );
+            })}
           </div>
 
           {/* Bottom-Right Label */}
