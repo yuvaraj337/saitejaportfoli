@@ -30,6 +30,7 @@ const CERTIFICATIONS = [
     label: "Nmap",
     logoSrc: "/cert-logos/nmap.png",
     logoAlt: "Nmap",
+    pdfUrl: "/certificates/NMAP - PACKT.pdf",
   },
   {
     id: "sec0",
@@ -37,6 +38,7 @@ const CERTIFICATIONS = [
     label: "SECO",
     logoSrc: "/cert-logos/sec0.png",
     logoAlt: "TryHackMe SECO",
+    pdfUrl: "/certificates/TryHackMe - SEC0.pdf",
   },
   {
     id: "sec1",
@@ -52,14 +54,6 @@ const CERTIFICATIONS = [
     logoSrc: "/cert-logos/linkedin.png",
     logoAlt: "LinkedIn Learning",
     pdfUrl: "/certificates/CertificateOfCompletion_Wireshark Essential Training.pdf",
-  },
-  {
-    id: "nmap-packt",
-    name: "Nmap",
-    label: "Packt / Coursera   |   Feb 06, 2026",
-    logoSrc: "/cert-logos/packt.png",
-    logoAlt: "Packt / Coursera",
-    pdfUrl: "/certificates/NMAP - PACKT.pdf",
   },
 ];
 
