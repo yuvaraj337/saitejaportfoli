@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import CinematicPreloader from "../components/CinematicPreloader";
 import HeroCanvasSequence from "../components/HeroCanvasSequence";
 import AboutMe from "../components/AboutMe";
 import TechnicalSkills from "../components/TechnicalSkills";
@@ -52,6 +53,8 @@ export const Route = createFileRoute("/")({
 function Index() {
   const heroTrackRef = useRef<HTMLElement>(null);
   const [isDesktop, setIsDesktop] = useState(true);
+  const [preloaderComplete, setPreloaderComplete] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,8 +65,24 @@ function Index() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const scrollToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", `#${sectionId}`);
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-page font-sans tracking-[-0.02em]">
+    <>
+      {!preloaderComplete && (
+        <CinematicPreloader onComplete={() => setPreloaderComplete(true)} />
+      )}
+      <main className="min-h-screen bg-page font-sans tracking-[-0.02em]">
       <section
         ref={heroTrackRef}
         className="relative w-full md:h-[300vh] h-[100dvh]"
@@ -97,37 +116,77 @@ function Index() {
             <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-hero-foreground/30 bg-hero-foreground/20 px-2 py-2 backdrop-blur-md md:flex">
               <a
                 href="#about"
-                className="rounded-full px-4 py-1.5 text-sm font-medium text-hero-foreground transition-colors hover:bg-hero-foreground/20"
+                onClick={(e) => scrollToSection(e, "about")}
+                className="cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium text-hero-foreground transition-colors hover:bg-hero-foreground/20"
               >
                 About
               </a>
               <a
                 href="#projects"
-                className="rounded-full px-4 py-1.5 text-sm font-medium text-hero-foreground/80 transition-colors hover:bg-hero-foreground/20 hover:text-hero-foreground"
+                onClick={(e) => scrollToSection(e, "projects")}
+                className="cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium text-hero-foreground/80 transition-colors hover:bg-hero-foreground/20 hover:text-hero-foreground"
               >
                 Projects
               </a>
               <a
                 href="#contact"
-                className="rounded-full px-4 py-1.5 text-sm font-medium text-hero-foreground/80 transition-colors hover:bg-hero-foreground/20 hover:text-hero-foreground"
+                onClick={(e) => scrollToSection(e, "contact")}
+                className="cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium text-hero-foreground/80 transition-colors hover:bg-hero-foreground/20 hover:text-hero-foreground"
               >
                 Contact
               </a>
             </div>
 
             <a
-              href="#lets-connect"
-              className="hidden rounded-full bg-hero-foreground px-6 py-2.5 text-sm font-semibold text-hero transition-colors hover:bg-hero-foreground/90 md:block"
+              href="#contact"
+              onClick={(e) => scrollToSection(e, "contact")}
+              className="cursor-pointer hidden rounded-full bg-hero-foreground px-6 py-2.5 text-sm font-semibold text-hero transition-colors hover:bg-hero-foreground/90 md:block"
             >
               Let's connect
             </a>
             <button
               type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
               className="rounded-full border border-hero-foreground/25 bg-hero-foreground/15 p-2 text-hero-foreground backdrop-blur-md md:hidden"
               aria-label="Open navigation"
             >
               <Menu size={22} strokeWidth={1.8} />
             </button>
+
+            {mobileMenuOpen && (
+              <div className="absolute top-full right-5 mt-2 flex min-w-[140px] flex-col gap-1 rounded-2xl border border-hero-foreground/30 bg-black/90 p-2 shadow-2xl backdrop-blur-xl md:hidden z-50">
+                <a
+                  href="#about"
+                  onClick={(e) => {
+                    scrollToSection(e, "about");
+                    setMobileMenuOpen(false);
+                  }}
+                  className="rounded-xl px-4 py-2 text-sm font-medium text-hero-foreground transition-colors hover:bg-hero-foreground/20"
+                >
+                  About
+                </a>
+                <a
+                  href="#projects"
+                  onClick={(e) => {
+                    scrollToSection(e, "projects");
+                    setMobileMenuOpen(false);
+                  }}
+                  className="rounded-xl px-4 py-2 text-sm font-medium text-hero-foreground/80 transition-colors hover:bg-hero-foreground/20 hover:text-hero-foreground"
+                >
+                  Projects
+                </a>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    scrollToSection(e, "contact");
+                    setMobileMenuOpen(false);
+                  }}
+                  className="rounded-xl px-4 py-2 text-sm font-medium text-hero-foreground/80 transition-colors hover:bg-hero-foreground/20 hover:text-hero-foreground"
+                >
+                  Contact
+                </a>
+              </div>
+            )}
           </nav>
 
           <div
@@ -157,7 +216,6 @@ function Index() {
           </div>
 
           <div
-            id="about"
             className="hero-anim hero-fade absolute bottom-14 z-50 hidden max-w-[260px] text-hero-foreground sm:block"
             style={{ left: "100px", animationDelay: "0.7s" }}
           >
@@ -167,7 +225,6 @@ function Index() {
           </div>
 
           <div
-            id="contact"
             className="hero-anim hero-fade absolute bottom-10 left-5 right-5 z-50 flex max-w-full flex-col items-start gap-4 text-hero-foreground sm:bottom-24 sm:left-auto sm:right-10 sm:max-w-[260px] sm:gap-5 md:right-14"
             style={{ animationDelay: "0.85s" }}
           >
@@ -175,8 +232,6 @@ function Index() {
               Network security engineer turned penetration tester, pursuing an M.Sc. in Mathematical Data Science in Germany. Certified. Curious. Built for the network layer.
             </p>
           </div>
-
-          <span id="projects" className="sr-only">Projects</span>
         </div>
       </section>
 
@@ -201,5 +256,6 @@ function Index() {
       {/* Let's Connect Section */}
       <LetsConnect />
     </main>
+    </>
   );
 }

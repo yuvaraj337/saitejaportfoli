@@ -68,7 +68,6 @@ export default function FeaturedProjects() {
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const scanLineRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const buttonRef = useRef<HTMLDivElement>(null);
   const bottomLeftRef = useRef<HTMLDivElement>(null);
   const bottomRightRef = useRef<HTMLDivElement>(null);
 
@@ -100,7 +99,6 @@ export default function FeaturedProjects() {
         descRef.current,
         quoteWrapRef.current,
         headerSceneRef.current,
-        buttonRef.current,
         bottomLeftRef.current,
         bottomRightRef.current,
       ];
@@ -125,7 +123,6 @@ export default function FeaturedProjects() {
           descRef.current,
           quoteWrapRef.current,
           headerSceneRef.current,
-          buttonRef.current,
           bottomLeftRef.current,
           bottomRightRef.current,
         ],
@@ -234,24 +231,17 @@ export default function FeaturedProjects() {
         }
       });
 
-      /* 5. View All Projects button */
-      const btnTime = 0.45 + PROJECTS.length * 0.16 + 0.1;
-      tl.to(
-        buttonRef.current,
-        { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
-        btnTime
-      );
-
-      /* 6. Bottom micro text */
+      /* 5. Bottom micro text */
+      const footerTime = 0.45 + PROJECTS.length * 0.16 + 0.1;
       tl.to(
         bottomLeftRef.current,
         { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
-        btnTime + 0.12
+        footerTime
       );
       tl.to(
         bottomRightRef.current,
         { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
-        btnTime + 0.18
+        footerTime + 0.1
       );
     }, sectionRef);
 
@@ -261,10 +251,11 @@ export default function FeaturedProjects() {
   return (
     <section
       ref={sectionRef}
-      id="featured-projects"
+      id="projects"
       className="proj-section"
       aria-label="Featured Projects"
     >
+      <span id="featured-projects" className="sr-only">Featured Projects</span>
       {/* Background ambient lighting */}
       <div className="proj-atmosphere" aria-hidden="true">
         <div className="proj-ambient-red" />
@@ -395,26 +386,8 @@ export default function FeaturedProjects() {
                   </span>
                 ))}
               </div>
-
-              {/* Action Link */}
-              <div className="proj-card-action">
-                <span className="proj-card-link-text">View Project</span>
-                <span className="proj-card-arrow" aria-hidden="true">→</span>
-              </div>
             </div>
           ))}
-        </div>
-
-        {/* ---- CENTERED BOTTOM BUTTON ---- */}
-        <div ref={buttonRef} className="proj-view-all-wrap">
-          <button
-            type="button"
-            className="proj-view-all-btn"
-            aria-label="View All Projects"
-          >
-            <span>View All Projects</span>
-            <span className="proj-btn-arrow" aria-hidden="true">→</span>
-          </button>
         </div>
 
         {/* ---- BOTTOM LABELS ---- */}

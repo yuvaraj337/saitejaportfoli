@@ -233,7 +233,8 @@ export default function AboutMe() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about-me" className="about-section" aria-label="About Me">
+    <section ref={sectionRef} id="about" className="about-section" aria-label="About Me">
+      <span id="about-me" className="sr-only">About Sai Teja</span>
       {/* 1. REFERENCE 2 background image — bottom layer */}
       <div className="about-bg-layer" aria-hidden="true" />
 

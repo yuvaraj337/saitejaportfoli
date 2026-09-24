@@ -224,10 +224,11 @@ export default function LetsConnect() {
   return (
     <section
       ref={sectionRef}
-      id="lets-connect"
+      id="contact"
       className="conn-section"
       aria-label="Let's Connect"
     >
+      <span id="lets-connect" className="sr-only">Let's Connect</span>
       {/* Background ambient lighting */}
       <div className="conn-atmosphere" aria-hidden="true">
         <div className="conn-tl-glow" />
@@ -286,7 +287,7 @@ export default function LetsConnect() {
 
               <a
                 ref={btn2Ref}
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/lakavath-sai-teja-757663209/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="conn-btn conn-btn-secondary"
