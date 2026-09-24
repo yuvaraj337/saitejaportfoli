@@ -60,6 +60,66 @@ function ChevronRight() {
   );
 }
 
+function TargetCrosshairIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="3" />
+      <line x1="12" y1="1" x2="12" y2="4" />
+      <line x1="12" y1="20" x2="12" y2="23" />
+      <line x1="1" y1="12" x2="4" y2="12" />
+      <line x1="20" y1="12" x2="23" y2="12" />
+    </svg>
+  );
+}
+
+function TerminalLaptopIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="12" rx="2" />
+      <line x1="2" y1="20" x2="22" y2="20" />
+    </svg>
+  );
+}
+
+function ShieldCheckIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <polyline points="9 12 11 14 15 10" />
+    </svg>
+  );
+}
+
+function FlagIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+      <line x1="4" y1="22" x2="4" y2="15" />
+    </svg>
+  );
+}
+
+function WifiIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+      <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+      <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+      <line x1="12" y1="20" x2="12.01" y2="20" strokeWidth="2.5" />
+    </svg>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
@@ -74,6 +134,7 @@ export default function Education() {
   const descRef = useRef<HTMLParagraphElement>(null);
   const quoteWrapRef = useRef<HTMLDivElement>(null);
   const quoteLineRef = useRef<HTMLDivElement>(null);
+  const currentFocusRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const focusRef = useRef<HTMLDivElement>(null);
   const booksImgRef = useRef<HTMLImageElement>(null);
@@ -94,6 +155,7 @@ export default function Education() {
         line2Ref.current,
         descRef.current,
         quoteWrapRef.current,
+        currentFocusRef.current,
         cardRef.current,
         focusRef.current,
         booksImgRef.current,
@@ -118,9 +180,10 @@ export default function Education() {
           line2Ref.current,
           descRef.current,
           quoteWrapRef.current,
+          currentFocusRef.current,
           bottomLeftRef.current,
           bottomRightRef.current,
-        ],
+        ].filter(Boolean),
         { opacity: 0, y: 20 }
       );
 
@@ -192,6 +255,11 @@ export default function Education() {
         quoteLineRef.current,
         { scaleY: 1, duration: 0.35, ease: "power2.inOut" },
         0.52
+      );
+      tl.to(
+        currentFocusRef.current,
+        { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
+        0.56
       );
 
       /* 5. Education card enters with scale 0.97 -> 1 */
@@ -309,6 +377,79 @@ export default function Education() {
                   It only gets more interesting.
                   <span className="edu-quote-mark edu-quote-mark-close" aria-hidden="true">&rdquo;</span>
                 </p>
+              </div>
+            </div>
+
+            {/* CURRENT FOCUS Card */}
+            <div ref={currentFocusRef} className="edu-focus-card">
+              <div className="edu-focus-top">
+                <div className="edu-focus-icon" aria-hidden="true">
+                  <TargetCrosshairIcon />
+                </div>
+                <div className="edu-focus-content">
+                  <span className="edu-focus-label">CURRENT FOCUS</span>
+                  <h4 className="edu-focus-title">
+                    <span className="edu-focus-title-white">Actively Learning Towards</span>
+                    <span className="edu-focus-title-red">Red Team &amp; Penetration Testing.</span>
+                  </h4>
+                </div>
+              </div>
+
+              <div className="edu-focus-strip">
+                <div className="edu-focus-item">
+                  <span className="edu-focus-item-icon" aria-hidden="true">
+                    <TerminalLaptopIcon />
+                  </span>
+                  <span className="edu-focus-item-text">
+                    Network
+                    <br />
+                    Pentesting
+                  </span>
+                </div>
+
+                <div className="edu-focus-item">
+                  <span className="edu-focus-item-icon" aria-hidden="true">
+                    <ShieldCheckIcon />
+                  </span>
+                  <span className="edu-focus-item-text">
+                    Offensive
+                    <br />
+                    Security
+                  </span>
+                </div>
+
+                <div className="edu-focus-item">
+                  <span className="edu-focus-item-icon" aria-hidden="true">
+                    <FlagIcon />
+                  </span>
+                  <span className="edu-focus-item-text">
+                    CTFs &amp;
+                    <br />
+                    Labs
+                  </span>
+                </div>
+
+                <div className="edu-focus-item">
+                  <span className="edu-focus-item-icon" aria-hidden="true">
+                    <WifiIcon />
+                  </span>
+                  <span className="edu-focus-item-text">
+                    Wireless
+                    <br />
+                    Security
+                  </span>
+                </div>
+
+                <div className="edu-focus-item">
+                  <span className="edu-focus-item-icon" aria-hidden="true">
+                    <SearchIcon />
+                  </span>
+                  <span className="edu-focus-item-text">
+                    Vulnerability
+                    <br />
+                    Assessment
+                  </span>
+                </div>
               </div>
             </div>
           </div>

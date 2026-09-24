@@ -63,6 +63,20 @@ const CERTIFICATIONS = [
     logoSrc: "/cert-logos/sec1.png",
     logoAlt: "TryHackMe SEC1",
   },
+  {
+    id: "wireshark",
+    name: "Wireshark Essential Training",
+    label: "LinkedIn Learning   |   Sep 01, 2026",
+    logoSrc: "/cert-logos/linkedin.png",
+    logoAlt: "LinkedIn Learning",
+  },
+  {
+    id: "nmap-packt",
+    name: "Nmap",
+    label: "Packt / Coursera   |   Feb 06, 2026",
+    logoSrc: "/cert-logos/packt.png",
+    logoAlt: "Packt / Coursera",
+  },
 ];
 
 /* ------------------------------------------------------------------ */

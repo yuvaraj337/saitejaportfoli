@@ -69,9 +69,21 @@ function Index() {
         className="relative w-full md:h-[300vh] h-[100dvh]"
       >
         <div
-          className="sticky top-0 h-screen w-full overflow-hidden bg-hero"
-          style={{ height: "100dvh" }}
+          className="sticky top-0 h-screen w-full overflow-hidden bg-hero bg-cover bg-center bg-no-repeat"
+          style={{
+            height: "100dvh",
+            backgroundImage: "url(/images/hero_background.png)",
+          }}
         >
+          {/* Static Hero Background Layer */}
+          <div
+            className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: "url(/images/hero_background.png)",
+            }}
+            aria-hidden="true"
+          />
+
           <HeroCanvasSequence
             containerRef={heroTrackRef}
             isDesktop={isDesktop}

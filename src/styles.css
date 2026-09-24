@@ -1312,6 +1312,14 @@
   max-height: 46px;
 }
 
+.cert-logo-wireshark {
+  max-height: 44px;
+}
+
+.cert-logo-nmap-packt {
+  max-height: 40px;
+}
+
 /* Card body */
 .cert-card-body {
   flex: 1;
@@ -2668,6 +2676,133 @@
   height: 1.5px;
   background: #dc2626;
   border-radius: 1px;
+}
+
+/* ---- CURRENT FOCUS CARD (LEFT COLUMN) ---- */
+.edu-focus-card {
+  margin-top: 1.35rem;
+  background: rgba(14, 5, 8, 0.75);
+  border: 1px solid rgba(220, 38, 38, 0.24);
+  border-radius: 12px;
+  padding: 1.15rem 1.25rem 1rem;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(220, 38, 38, 0.04);
+  outline: none;
+  cursor: default;
+  transition:
+    transform 0.35s cubic-bezier(0.33, 1, 0.68, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  will-change: transform, border-color, box-shadow;
+}
+
+.edu-focus-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(220, 38, 38, 0.45);
+  box-shadow:
+    0 15px 30px -5px rgba(0, 0, 0, 0.85),
+    0 0 25px rgba(220, 38, 38, 0.1);
+}
+
+.edu-focus-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.edu-focus-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-top: 2px;
+}
+
+.edu-focus-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.edu-focus-label {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.25rem;
+}
+
+.edu-focus-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.edu-focus-title-white {
+  color: #ffffff;
+  display: block;
+}
+
+.edu-focus-title-red {
+  color: #dc2626;
+  display: block;
+}
+
+/* Bottom pill / badges strip */
+.edu-focus-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.edu-focus-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-right: 0.25rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.edu-focus-item:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.edu-focus-item-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edu-focus-item-text {
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.18;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 640px) {
+  .edu-focus-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+
+  .edu-focus-item {
+    border-right: none;
+    padding-right: 0;
+  }
 }
 
 /* ================================================================== */

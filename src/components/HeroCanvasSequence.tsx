@@ -253,8 +253,8 @@ export default function HeroCanvasSequence({
       mousePos.current = { x: event.clientX, y: event.clientY };
       isHovering.current = true;
 
-      // Edge case: Only mark mouse moved after reaching end frame if we are at end frame
-      if (heroAnimationComplete.current) {
+      // Only mark mouse moved if hover is currently active (Frame 20+)
+      if (heroAnimationComplete.current || hoverEnabled.current) {
         mouseMovedAfterComplete.current = true;
       }
     };
@@ -332,23 +332,20 @@ export default function HeroCanvasSequence({
       }
 
       // --- B. Sequential State Evaluation ---
-      // End frame condition: Reached frame 180 (index 179) and scroll progress >= 0.98
-      const isAtEndFrame =
-        frameIndex >= TOTAL_FRAMES - 1 && currentProgress.current >= 0.98;
+      // Hover activation condition: Active when scroll reaches Frame 20 or above
+      const currentFrame = frameIndex + 1;
 
-      if (isAtEndFrame) {
-        // STATE 2: End frame reached -> Enable hover
-        if (!heroAnimationComplete.current) {
-          heroAnimationComplete.current = true;
+      if (currentFrame >= 20) {
+        // Frame 20+ -> Hover effect enabled
+        if (!hoverEnabled.current) {
           hoverEnabled.current = true;
-          // Edge case: Don't instantly flash cyber state if cursor was already positioned
-          // Wait for intentional movement after reaching frame 180
+          heroAnimationComplete.current = true;
           mouseMovedAfterComplete.current = false;
         }
       } else {
-        // STATE 1 & SCROLLING BACK UP: Hover must be completely DISABLED
-        heroAnimationComplete.current = false;
+        // Frames 1–19 -> Hover effect disabled
         hoverEnabled.current = false;
+        heroAnimationComplete.current = false;
         mouseMovedAfterComplete.current = false;
       }
 
