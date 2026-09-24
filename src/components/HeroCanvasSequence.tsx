@@ -253,7 +253,7 @@ export default function HeroCanvasSequence({
       mousePos.current = { x: event.clientX, y: event.clientY };
       isHovering.current = true;
 
-      // Only mark mouse moved if hover is currently active (Frame 20+)
+      // Only mark mouse moved if hover is currently active (Frame 161+)
       if (heroAnimationComplete.current || hoverEnabled.current) {
         mouseMovedAfterComplete.current = true;
       }
@@ -332,18 +332,18 @@ export default function HeroCanvasSequence({
       }
 
       // --- B. Sequential State Evaluation ---
-      // Hover activation condition: Active when scroll reaches Frame 20 or above
+      // Hover activation condition: Active ONLY after Frame 160 (Frames 161–180)
       const currentFrame = frameIndex + 1;
 
-      if (currentFrame >= 20) {
-        // Frame 20+ -> Hover effect enabled
+      if (currentFrame > 160) {
+        // Frame 161+ -> Hover effect enabled
         if (!hoverEnabled.current) {
           hoverEnabled.current = true;
           heroAnimationComplete.current = true;
           mouseMovedAfterComplete.current = false;
         }
       } else {
-        // Frames 1–19 -> Hover effect disabled
+        // Frames 001–160 -> Hover effect disabled
         hoverEnabled.current = false;
         heroAnimationComplete.current = false;
         mouseMovedAfterComplete.current = false;

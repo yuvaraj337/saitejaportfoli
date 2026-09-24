@@ -4,26 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* External link icon */
-function ExternalLinkIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-      <polyline points="15 3 21 3 21 9" />
-      <line x1="10" y1="14" x2="21" y2="3" />
-    </svg>
-  );
-}
-
-/* Chevron right */
-function ChevronRight() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M9 18l6-6-6-6" />
-    </svg>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 /*  Cert data with exact reference logos                              */
 /* ------------------------------------------------------------------ */
@@ -373,14 +353,6 @@ export default function Certifications() {
                   <div className="cert-card-body">
                     <h3 className="cert-card-name">{cert.name}</h3>
                     <span className="cert-card-label">{cert.label}</span>
-                  </div>
-                  <div className="cert-card-actions">
-                    <span className="cert-card-ext">
-                      <ExternalLinkIcon />
-                    </span>
-                    <span className="cert-card-arrow">
-                      <ChevronRight />
-                    </span>
                   </div>
                 </div>
               </div>
