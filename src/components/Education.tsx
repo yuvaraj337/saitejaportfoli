@@ -485,7 +485,11 @@ export default function Education() {
                   </div>
                   <div className="edu-row-content">
                     <span className="edu-row-label">Institution</span>
-                    <span className="edu-row-value">(To be updated)</span>
+                    <span className="edu-row-value">
+                      Brandenburgische Technische Universität
+                      <br />
+                      Cottbus-Senftenberg
+                    </span>
                   </div>
                 </div>
 
@@ -495,7 +499,7 @@ export default function Education() {
                   </div>
                   <div className="edu-row-content">
                     <span className="edu-row-label">Duration</span>
-                    <span className="edu-row-value">2024 — Present</span>
+                    <span className="edu-row-value">2026 — Present</span>
                   </div>
                 </div>
 
